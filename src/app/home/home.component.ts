@@ -6,7 +6,90 @@ import { RouterModule } from '@angular/router';
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  template: `
+    <!-- Landing Page para Servicios Aduanales -->
+<div class="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
+
+  <!-- Hero Section -->
+  <section class="flex-1 flex flex-col md:flex-row items-center justify-between container mx-auto px-4 py-16 gap-8">
+    <div class="flex-1 animate-fade-in">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-4">Soluciones Aduanales <span class="text-blue-500">Rápidas y Seguras</span></h1>
+      <p class="text-lg text-gray-700 mb-8">Facilitamos tus importaciones y exportaciones con asesoría experta y atención personalizada. ¡Deja tus trámites en manos de profesionales!</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#contacto" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-blue-700 transition-all transform hover:scale-105">Solicita tu Cotización</a>
+        <a routerLink="/register-cliente" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-blue-50 transition-all transform hover:scale-105 border-2 border-blue-600">Registrar Cliente</a>
+      </div>
+    </div>
+    <div class="flex-1 flex justify-center animate-slide-in">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Servicios Aduanales" class="rounded-xl shadow-2xl w-full max-w-md transform hover:scale-105 transition-transform"/>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Nuestros Servicios</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-transform">
+        <span class="text-4xl mb-4 text-blue-600">📦</span>
+        <h3 class="font-semibold text-xl mb-2">Despacho Aduanal</h3>
+        <p class="text-gray-600 text-center">Gestión integral de trámites aduanales para importación y exportación de mercancías.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-transform">
+        <span class="text-4xl mb-4 text-blue-600">📝</span>
+        <h3 class="font-semibold text-xl mb-2">Asesoría Legal</h3>
+        <p class="text-gray-600 text-center">Consultoría en normatividad, clasificación arancelaria y cumplimiento de regulaciones.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-transform">
+        <span class="text-4xl mb-4 text-blue-600">🚚</span>
+        <h3 class="font-semibold text-xl mb-2">Logística y Transporte</h3>
+        <p class="text-gray-600 text-center">Coordinación de transporte nacional e internacional para tu carga.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section id="ventajas" class="bg-blue-50 py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">¿Por qué elegirnos?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform">
+          <span class="text-3xl mb-2 text-blue-700">⏱️</span>
+          <h4 class="font-semibold text-lg mb-1">Rapidez</h4>
+          <p class="text-gray-600 text-center">Procesos ágiles y tiempos de respuesta inmediatos.</p>
+        </div>
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform">
+          <span class="text-3xl mb-2 text-blue-700">🛡️</span>
+          <h4 class="font-semibold text-lg mb-1">Seguridad</h4>
+          <p class="text-gray-600 text-center">Cumplimiento estricto de la normativa y protección de tu mercancía.</p>
+        </div>
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform">
+          <span class="text-3xl mb-2 text-blue-700">🤝</span>
+          <h4 class="font-semibold text-lg mb-1">Atención Personalizada</h4>
+          <p class="text-gray-600 text-center">Asesoría dedicada en cada etapa del proceso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Contáctanos</h2>
+    <form class="max-w-xl mx-auto bg-white rounded-lg shadow-xl p-8 flex flex-col gap-4 transform hover:scale-105 transition-transform">
+      <input type="text" placeholder="Nombre" class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all" required />
+      <input type="email" placeholder="Correo electrónico" class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all" required />
+      <input type="tel" placeholder="Teléfono" class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all" />
+      <textarea placeholder="¿En qué podemos ayudarte?" class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all" rows="4" required></textarea>
+      <button type="submit" class="bg-blue-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-blue-800 transition-all transform hover:scale-105">Enviar Mensaje</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white py-6 mt-auto">
+    <div class="container mx-auto text-center text-sm">
+      © 2025 Aduanas Express. Todos los derechos reservados.
+    </div>
+  </footer>
+</div>
+  `
 })
 export class HomeComponent {}

@@ -1,0 +1,119 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+      <!-- Header -->
+      <div class="bg-indigo-600 px-4 py-5 sm:px-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-white">
+              Editar Cliente
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-indigo-200">
+              Actualice la información del cliente en el sistema
+            </p>
+          </div>
+          <button (click)="cancelar()" 
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white">
+            <svg class="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Volver
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="error" class="bg-red-50 border-l-4 border-red-400 p-4 mx-4 mt-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-700">{{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
+
+      <!-- Form -->
+      <form *ngIf="!isLoading" [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="space-y-6 p-6">
+        <div class="grid grid-cols-6 gap-6">
+          <div class="col-span-6 sm:col-span-3">
+            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text" formControlName="nombre" id="nombre"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="clienteForm.get('nombre')?.invalid && clienteForm.get('nombre')?.touched" 
+                 class="mt-1 text-sm text-red-600">
+              <span *ngIf="clienteForm.get('nombre')?.errors?.['required']">El nombre es requerido</span>
+              <span *ngIf="clienteForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+            </div>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
+            <input type="text" formControlName="apellido" id="apellido"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="clienteForm.get('apellido')?.invalid && clienteForm.get('apellido')?.touched" 
+                 class="mt-1 text-sm text-red-600">
+              <span *ngIf="clienteForm.get('apellido')?.errors?.['required']">El apellido es requerido</span>
+              <span *ngIf="clienteForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres</span>
+            </div>
+          </div>
+
+          <div class="col-span-6 sm:col-span-4">
+            <label for="correoElectronico" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <input type="email" formControlName="correoElectronico" id="correoElectronico"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="clienteForm.get('correoElectronico')?.invalid && clienteForm.get('correoElectronico')?.touched" 
+                 class="mt-1 text-sm text-red-600">
+              <span *ngIf="clienteForm.get('correoElectronico')?.errors?.['required']">El correo electrónico es requerido</span>
+              <span *ngIf="clienteForm.get('correoElectronico')?.errors?.['email']">Ingrese un correo electrónico válido</span>
+            </div>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+            <input type="tel" formControlName="telefono" id="telefono"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched" 
+                 class="mt-1 text-sm text-red-600">
+              <span *ngIf="clienteForm.get('telefono')?.errors?.['required']">El teléfono es requerido</span>
+              <span *ngIf="clienteForm.get('telefono')?.errors?.['pattern']">Ingrese un número de teléfono válido (10 dígitos)</span>
+            </div>
+          </div>
+
+          <div class="col-span-6">
+            <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+            <input type="text" formControlName="direccion" id="direccion"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div *ngIf="clienteForm.get('direccion')?.invalid && clienteForm.get('direccion')?.touched" 
+                 class="mt-1 text-sm text-red-600">
+              <span *ngIf="clienteForm.get('direccion')?.errors?.['required']">La dirección es requerida</span>
+              <span *ngIf="clienteForm.get('direccion')?.errors?.['minlength']">La dirección debe tener al menos 5 caracteres</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+          <button type="button" (click)="cancelar()"
+                  class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Cancelar
+          </button>
+          <button type="submit" [disabled]="clienteForm.invalid || isLoading"
+                  class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 
